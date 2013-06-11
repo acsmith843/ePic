@@ -19,6 +19,7 @@ public class Album extends AbstractEntity {
     private String ownerId;
 
     @ManyToOne(fetch= FetchType.LAZY, cascade = CascadeType.ALL)
+    @OrderBy("created DESC")
     private List<Thumbnail> thumbs;
 
     private List<String> accessorFacebookIds;
