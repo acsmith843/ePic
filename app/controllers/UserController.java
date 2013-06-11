@@ -20,9 +20,9 @@ public class UserController extends Controller {
 
     //Storing these methods in here for now
 
-    public static Result findUserById(String id) {
+    public static Result findUserById(String userId) {
 
-        User user = Ebean.find(User.class, id);
+        User user = Ebean.find(User.class, userId);
 
         if (user == null) {
             return notFound();
@@ -39,7 +39,7 @@ public class UserController extends Controller {
     @BodyParser.Of(BodyParser.Json.class)
     public static Result createUser() {
 
-        User user = null;
+        User user;
 
         //convert the request to json
         JsonNode json = request().body().asJson();
