@@ -11,7 +11,7 @@ import java.util.List;
  * Date: 6/11/13
  */
 @Entity
-@Table(name = "ALBUM")
+@Table(name = "ALBUMS")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Album extends AbstractEntity {
 
@@ -21,8 +21,6 @@ public class Album extends AbstractEntity {
     @ManyToOne(fetch= FetchType.LAZY, cascade = CascadeType.ALL)
     @OrderBy("created DESC")
     private List<Thumbnail> thumbs;
-
-    private List<String> accessorFacebookIds;
 
     public static Finder<Long, Album> find = new Finder(Long.class, Album.class);
 
@@ -57,14 +55,6 @@ public class Album extends AbstractEntity {
         this.thumbs = thumbs;
     }
 
-    public List<String> getAccessorFacebookIds() {
-        return accessorFacebookIds;
-    }
-
-    public void setAccessorFacebookIds(List<String> accessorIds) {
-        this.accessorFacebookIds = accessorFacebookIds;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -73,8 +63,6 @@ public class Album extends AbstractEntity {
 
         Album album = (Album) o;
 
-        if (accessorFacebookIds != null ? !accessorFacebookIds.equals(album.accessorFacebookIds) : album.accessorFacebookIds != null)
-            return false;
         if (ownerId != null ? !ownerId.equals(album.ownerId) : album.ownerId != null) return false;
         if (thumbs != null ? !thumbs.equals(album.thumbs) : album.thumbs != null) return false;
         if (title != null ? !title.equals(album.title) : album.title != null) return false;
@@ -88,7 +76,6 @@ public class Album extends AbstractEntity {
         result = 31 * result + (title != null ? title.hashCode() : 0);
         result = 31 * result + (ownerId != null ? ownerId.hashCode() : 0);
         result = 31 * result + (thumbs != null ? thumbs.hashCode() : 0);
-        result = 31 * result + (accessorFacebookIds != null ? accessorFacebookIds.hashCode() : 0);
         return result;
     }
 
@@ -98,7 +85,6 @@ public class Album extends AbstractEntity {
                 "title='" + title + '\'' +
                 ", ownerId='" + ownerId + '\'' +
                 ", thumbs=" + thumbs +
-                ", accessorFacebookIds=" + accessorFacebookIds +
                 '}';
     }
 }

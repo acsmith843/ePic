@@ -3,6 +3,7 @@ package models;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -66,6 +67,11 @@ public class User extends AbstractEntity {
     }
 
     public List<Album> getAlbums() {
+
+        if (albums == null) {
+            albums = new ArrayList<Album>();
+        }
+
         return albums;
     }
 
