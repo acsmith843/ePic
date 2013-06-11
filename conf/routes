@@ -9,8 +9,12 @@ GET     /                           controllers.Application.index()
 GET     /v1/heartbeat               controllers.StatusController.heartbeat()
 
 # Users
-POST    /v1/users                   controllers.UserController.createUser()
-GET     /v1/users/:id               controllers.UserController.findUserById(id: String)
+POST    /v1/user                   controllers.UserController.createUser()
+GET     /v1/user/:id               controllers.UserController.findUserById(id: String)
+
+# Albums
+POST    /v1/album                   controllers.AlbumController.createAlbum()
+GET     /v1/album/:id               controllers.AlbumController.findAlbum(id: String)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

@@ -19,6 +19,7 @@ import static play.mvc.Results.*;
  */
 public class AlbumController {
 
+
     //Storing these methods in here for now
 
     public static Result findAlbum(String id) {
