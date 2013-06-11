@@ -2,8 +2,7 @@ package models;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -12,14 +11,18 @@ import java.util.List;
  * Date: 6/10/13
  */
 @Entity
-@Table(name= "USERS")
+@Table(name = "USERS")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class User extends AbstractEntity {
 
     private String firstName;
     private String lastName;
     private String eMail;
-    private List<String> albumIds;
+    private String facebookId;
+
+    @ManyToMany(fetch= FetchType.LAZY, cascade= CascadeType.ALL)
+    @OrderBy("created DESC")
+    private List<Album> albums;
 
     public static Finder<Long, User> find = new Finder(Long.class, User.class);
 
@@ -53,6 +56,23 @@ public class User extends AbstractEntity {
         this.eMail = eMail;
     }
 
+
+    public String getFacebookId() {
+        return facebookId;
+    }
+
+    public void setFacebookId(String facebookId) {
+        this.facebookId = facebookId;
+    }
+
+    public List<Album> getAlbums() {
+        return albums;
+    }
+
+    public void setAlbums(List<Album> albums) {
+        this.albums = albums;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -61,7 +81,9 @@ public class User extends AbstractEntity {
 
         User user = (User) o;
 
+        if (albums != null ? !albums.equals(user.albums) : user.albums != null) return false;
         if (eMail != null ? !eMail.equals(user.eMail) : user.eMail != null) return false;
+        if (facebookId != null ? !facebookId.equals(user.facebookId) : user.facebookId != null) return false;
         if (firstName != null ? !firstName.equals(user.firstName) : user.firstName != null) return false;
         if (lastName != null ? !lastName.equals(user.lastName) : user.lastName != null) return false;
 
@@ -74,6 +96,8 @@ public class User extends AbstractEntity {
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         result = 31 * result + (eMail != null ? eMail.hashCode() : 0);
+        result = 31 * result + (facebookId != null ? facebookId.hashCode() : 0);
+        result = 31 * result + (albums != null ? albums.hashCode() : 0);
         return result;
     }
 
@@ -83,14 +107,8 @@ public class User extends AbstractEntity {
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", eMail='" + eMail + '\'' +
+                ", facebookId='" + facebookId + '\'' +
+                ", albums=" + albums +
                 '}';
-    }
-
-    public List<String> getAlbumIds() {
-        return albumIds;
-    }
-
-    public void setAlbumIds(List<String> albumIds) {
-        this.albumIds = albumIds;
     }
 }
