@@ -3,13 +3,13 @@
 
 # --- !Ups
 
-create table ALBUM (
+create table ALBUMS (
   id                        varchar(255) not null,
   title                     varchar(255),
   owner_id                  varchar(255),
   created                   timestamp not null,
   modified                  timestamp not null,
-  constraint pk_ALBUM primary key (id))
+  constraint pk_ALBUMS primary key (id))
 ;
 
 create table THUMB (
@@ -32,12 +32,12 @@ create table USERS (
 ;
 
 
-create table USERS_ALBUM (
+create table USERS_ALBUMS (
   USERS_id                       varchar(255) not null,
-  ALBUM_id                       varchar(255) not null,
-  constraint pk_USERS_ALBUM primary key (USERS_id, ALBUM_id))
+  ALBUMS_id                      varchar(255) not null,
+  constraint pk_USERS_ALBUMS primary key (USERS_id, ALBUMS_id))
 ;
-create sequence ALBUM_seq;
+create sequence ALBUMS_seq;
 
 create sequence THUMB_seq;
 
@@ -46,21 +46,21 @@ create sequence USERS_seq;
 
 
 
-alter table USERS_ALBUM add constraint fk_USERS_ALBUM_USERS_01 foreign key (USERS_id) references USERS (id);
+alter table USERS_ALBUMS add constraint fk_USERS_ALBUMS_USERS_01 foreign key (USERS_id) references USERS (id);
 
-alter table USERS_ALBUM add constraint fk_USERS_ALBUM_ALBUM_02 foreign key (ALBUM_id) references ALBUM (id);
+alter table USERS_ALBUMS add constraint fk_USERS_ALBUMS_ALBUMS_02 foreign key (ALBUMS_id) references ALBUMS (id);
 
 # --- !Downs
 
-drop table if exists ALBUM cascade;
+drop table if exists ALBUMS cascade;
 
 drop table if exists THUMB cascade;
 
 drop table if exists USERS cascade;
 
-drop table if exists USERS_ALBUM cascade;
+drop table if exists USERS_ALBUMS cascade;
 
-drop sequence if exists ALBUM_seq;
+drop sequence if exists ALBUMS_seq;
 
 drop sequence if exists THUMB_seq;
 
