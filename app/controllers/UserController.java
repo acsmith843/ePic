@@ -1,6 +1,7 @@
 package controllers;
 
 import com.avaje.ebean.Ebean;
+import dal.UserDAO;
 import models.User;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -17,6 +18,8 @@ import java.io.IOException;
  */
 public class UserController extends Controller {
 
+private static UserDAO userDAO = new UserDAO();
+
 
     //Storing these methods in here for now
 
@@ -32,7 +35,13 @@ public class UserController extends Controller {
         return ok(mapper.convertValue(user, JsonNode.class));
     }
 
+    public static Result findUserByFacebookId(String userFBId) {
 
+        User user = UserDAO.getUserByFacebookId(userFBId);
+
+        ObjectMapper mapper = new ObjectMapper();
+        return ok(mapper.convertValue(user, JsonNode.class));
+    }
 
     // For scalability purposes, these CRUD operations should probably go in a DAO layer or something
 

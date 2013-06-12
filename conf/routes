@@ -9,8 +9,9 @@ GET     /                           controllers.Application.index()
 GET     /v1/heartbeat               controllers.StatusController.heartbeat()
 
 # Users
-POST    /v1/user                   controllers.UserController.createUser()
-GET     /v1/user/:id               controllers.UserController.findUserById(id: String)
+POST    /v1/user                    controllers.UserController.createUser()
+GET     /v1/user/:id                controllers.UserController.findUserById(id: String)
+GET     /v1/user/fb/:facebookId     controllers.UserController.findUserByFacebookId(facebookId: String)
 
 # Albums
 POST    /v1/album                   controllers.AlbumController.createAlbum()
