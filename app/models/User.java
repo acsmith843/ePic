@@ -16,8 +16,7 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class User extends AbstractEntity {
 
-    private String firstName;
-    private String lastName;
+    private String name;
     private String eMail;
     private String facebookId;
 
@@ -33,20 +32,12 @@ public class User extends AbstractEntity {
 
     // Getters / Setters
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String geteMail() {
@@ -90,8 +81,7 @@ public class User extends AbstractEntity {
         if (albums != null ? !albums.equals(user.albums) : user.albums != null) return false;
         if (eMail != null ? !eMail.equals(user.eMail) : user.eMail != null) return false;
         if (facebookId != null ? !facebookId.equals(user.facebookId) : user.facebookId != null) return false;
-        if (firstName != null ? !firstName.equals(user.firstName) : user.firstName != null) return false;
-        if (lastName != null ? !lastName.equals(user.lastName) : user.lastName != null) return false;
+        if (name != null ? !name.equals(user.name) : user.name != null) return false;
 
         return true;
     }
@@ -99,8 +89,7 @@ public class User extends AbstractEntity {
     @Override
     public int hashCode() {
         int result = super.hashCode();
-        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
-        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (eMail != null ? eMail.hashCode() : 0);
         result = 31 * result + (facebookId != null ? facebookId.hashCode() : 0);
         result = 31 * result + (albums != null ? albums.hashCode() : 0);
@@ -110,11 +99,13 @@ public class User extends AbstractEntity {
     @Override
     public String toString() {
         return "User{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+                "name='" + name + '\'' +
                 ", eMail='" + eMail + '\'' +
                 ", facebookId='" + facebookId + '\'' +
                 ", albums=" + albums +
                 '}';
     }
+
+    //CRUD Operations
+
 }

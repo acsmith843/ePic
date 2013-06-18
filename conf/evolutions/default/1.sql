@@ -7,6 +7,8 @@ create table ALBUMS (
   id                        varchar(255) not null,
   title                     varchar(255),
   owner_id                  varchar(255),
+  owner_name                varchar(255),
+  cover_image               varchar(255),
   created                   timestamp not null,
   modified                  timestamp not null,
   constraint pk_ALBUMS primary key (id))
@@ -22,8 +24,7 @@ create table THUMB (
 
 create table USERS (
   id                        varchar(255) not null,
-  first_name                varchar(255),
-  last_name                 varchar(255),
+  name                      varchar(255),
   e_mail                    varchar(255),
   facebook_id               varchar(255),
   created                   timestamp not null,

@@ -1,7 +1,6 @@
 package controllers;
 
 import com.avaje.ebean.Ebean;
-import dal.UserDAO;
 import models.User;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -18,11 +17,13 @@ import java.io.IOException;
  */
 public class UserController extends Controller {
 
-private static UserDAO userDAO = new UserDAO();
-
-
     //Storing these methods in here for now
 
+    /**
+     *
+     * @param userId
+     * @return
+     */
     public static Result findUserById(String userId) {
 
         User user = Ebean.find(User.class, userId);
@@ -35,9 +36,18 @@ private static UserDAO userDAO = new UserDAO();
         return ok(mapper.convertValue(user, JsonNode.class));
     }
 
+    /**
+     *
+     * @param userFBId
+     * @return
+     */
     public static Result findUserByFacebookId(String userFBId) {
 
-        User user = UserDAO.getUserByFacebookId(userFBId);
+        User user = Ebean.find(User.class).where().eq("facebookId", userFBId).findUnique();
+
+        if (user == null) {
+            return notFound();
+        }
 
         ObjectMapper mapper = new ObjectMapper();
         return ok(mapper.convertValue(user, JsonNode.class));
