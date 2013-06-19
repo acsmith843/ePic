@@ -22,7 +22,7 @@ public class Album extends AbstractEntity {
 
     @ManyToOne(fetch= FetchType.LAZY, cascade = CascadeType.ALL)
     @OrderBy("created DESC")
-    private List<Thumbnail> thumbs;
+    private List<Image> images;
 
     public static Finder<Long, Album> find = new Finder(Long.class, Album.class);
 
@@ -64,12 +64,12 @@ public class Album extends AbstractEntity {
         this.coverImage = coverImage;
     }
 
-    public List<Thumbnail> getThumbs() {
-        return thumbs;
+    public List<Image> getImages() {
+        return images;
     }
 
-    public void setThumbs(List<Thumbnail> thumbs) {
-        this.thumbs = thumbs;
+    public void setImages(List<Image> images) {
+        this.images = images;
     }
 
     @Override
@@ -82,7 +82,7 @@ public class Album extends AbstractEntity {
 
         if (ownerId != null ? !ownerId.equals(album.ownerId) : album.ownerId != null) return false;
         if (ownerName != null ? !ownerName.equals(album.ownerName) : album.ownerName != null) return false;
-        if (thumbs != null ? !thumbs.equals(album.thumbs) : album.thumbs != null) return false;
+        if (images != null ? !images.equals(album.images) : album.images != null) return false;
         if (title != null ? !title.equals(album.title) : album.title != null) return false;
         if (coverImage != null ? !coverImage.equals(album.coverImage) : album.coverImage != null) return false;
 
@@ -95,7 +95,7 @@ public class Album extends AbstractEntity {
         result = 31 * result + (title != null ? title.hashCode() : 0);
         result = 31 * result + (ownerId != null ? ownerId.hashCode() : 0);
         result = 31 * result + (ownerName != null ? ownerName.hashCode() : 0);
-        result = 31 * result + (thumbs != null ? thumbs.hashCode() : 0);
+        result = 31 * result + (images != null ? images.hashCode() : 0);
         result = 31 * result + (coverImage != null ? coverImage.hashCode() : 0);
         return result;
     }
@@ -106,7 +106,7 @@ public class Album extends AbstractEntity {
                 "title='" + title + '\'' +
                 ", ownerId='" + ownerId + '\'' +
                 ", ownerName='" + ownerName + '\'' +
-                ", thumbs=" + thumbs +
+                ", images=" + images +
                 ", coverImage=" + coverImage +
                 '}';
     }

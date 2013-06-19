@@ -14,12 +14,12 @@ create table ALBUMS (
   constraint pk_ALBUMS primary key (id))
 ;
 
-create table THUMB (
+create table IMAGES (
   id                        varchar(255) not null,
   url                       varchar(255),
   created                   timestamp not null,
   modified                  timestamp not null,
-  constraint pk_THUMB primary key (id))
+  constraint pk_IMAGES primary key (id))
 ;
 
 create table USERS (
@@ -40,7 +40,7 @@ create table USERS_ALBUMS (
 ;
 create sequence ALBUMS_seq;
 
-create sequence THUMB_seq;
+create sequence IMAGES_seq;
 
 create sequence USERS_seq;
 
@@ -55,7 +55,7 @@ alter table USERS_ALBUMS add constraint fk_USERS_ALBUMS_ALBUMS_02 foreign key (A
 
 drop table if exists ALBUMS cascade;
 
-drop table if exists THUMB cascade;
+drop table if exists IMAGES cascade;
 
 drop table if exists USERS cascade;
 
@@ -63,7 +63,7 @@ drop table if exists USERS_ALBUMS cascade;
 
 drop sequence if exists ALBUMS_seq;
 
-drop sequence if exists THUMB_seq;
+drop sequence if exists IMAGES_seq;
 
 drop sequence if exists USERS_seq;
 

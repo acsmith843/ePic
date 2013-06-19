@@ -1,4 +1,4 @@
 ePic
 ====
 
-Easy photo sharing platform - Built on Play 2.1 
+Photo album collaboration - Built on Play 2.1
